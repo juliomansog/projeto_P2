@@ -29,7 +29,7 @@ public class Treino {
     public double calcularCargaTotal() {
         double total = 0;
         for (Exercicio e : exercicios) {
-            total += e.calcularVolume();
+            total += e.calcularVolumeTotal();
         }
         return total;
     }
@@ -54,9 +54,9 @@ public class Treino {
                 e.exibirDetalhes();
             }
         }
-        System.out.println("Carga total (volume): " + calcularCargaTotal() + " kg");
+        System.out.println("\nVolume total : " + calcularCargaTotal() + " kg");
         int tempo = calcularTempoTotalSegundos();
-        System.out.println("Tempo total aproximado: " + tempo + " segundos (" + (tempo / 60) + " min " + (tempo % 60) + " s)");
+        System.out.println("Tempo total : " + tempo + " s (" + (tempo / 60) + " min " + (tempo % 60) + " s)");
     }
 
    
@@ -64,5 +64,6 @@ public class Treino {
         return "Treino: " + nome + " | Exercícios: " + exercicios.size();
     }
 }
+
 
 
