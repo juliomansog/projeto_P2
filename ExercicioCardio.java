@@ -1,24 +1,39 @@
 public class ExercicioCardio extends Exercicio {
 
-    private int tempo; 
-    private double metaDistancia; 
+    private int tempo;
+    private double metaDistancia;
 
     public ExercicioCardio(String nome, int tempo, double metaDistancia) {
-        
         setNome(nome);
         setGrupoMuscular("Cardio");
-        setSeries(0);
-        setRepeticoes(0);
+        setSeries(1);
+        setRepeticoes(1);
         setCarga(0);
-        
         this.tempo = tempo;
         this.metaDistancia = metaDistancia;
     }
 
     @Override
     public double calcularVolumeTotal() {
-        
-        return 0.0;
+        return calcularEsforco();
+    }
+
+    @Override
+    public int getTempoDescanso() {
+        return 0;
+    }
+
+    public double calcularEsforco() {
+        if (tempo <= 0) return 0.0;
+        return (this.metaDistancia / this.tempo) * 10.0;
+    }
+
+    public int getTempoTotalSegundos() {
+        return this.tempo * 60;
+    }
+
+    public void exibirTempoCardio() {
+        System.out.println("Tempo Alvo: " + this.tempo + " minutos");
     }
 
     @Override
@@ -26,20 +41,6 @@ public class ExercicioCardio extends Exercicio {
         System.out.println(toString());
         exibirTempoCardio();
         System.out.printf("Esforço (Intensidade): %.2f%n", calcularEsforco());
-    }
-    
-   
-    public double calcularEsforco() {
-        if (tempo <= 0) {
-            return 0.0;
-        }
-       
-        return (this.metaDistancia / this.tempo) * 10.0;
-    }
-
-    
-    public void exibirTempoCardio() {
-        System.out.println("Tempo Alvo: " + this.tempo + " minutos");
     }
 
     @Override
@@ -49,25 +50,13 @@ public class ExercicioCardio extends Exercicio {
                "\nDistância: " + metaDistancia + " km";
     }
 
-    
-
-    public int getTempo() {
-        return tempo;
-    }
-
+    public int getTempo() { return tempo; }
     public void setTempo(int tempo) {
-        if (tempo >= 0) {
-            this.tempo = tempo;
-        }
+        if (tempo >= 0) this.tempo = tempo;
     }
 
-    public double getMetaDistancia() {
-        return metaDistancia;
-    }
-
+    public double getMetaDistancia() { return metaDistancia; }
     public void setMetaDistancia(double metaDistancia) {
-        if (metaDistancia >= 0) {
-            this.metaDistancia = metaDistancia;
-        }
+        if (metaDistancia >= 0) this.metaDistancia = metaDistancia;
     }
 }
