@@ -38,27 +38,53 @@ public class Usuario {
 
     // Métodos
     public void adicionarTreino(Treino treino){
-        if (treino != null) {
+       try {
+            if (treino == null) {
+                throw new AppException("Erro: o treino não pode ser nulo.");
+            }
+
             treinos.add(treino);
+            System.out.println("Treino adicionado com sucesso.");
+
+        } catch (AppException e) {
+            System.out.println("Falha ao adicionar treino: " + e.getMessage());
         }
     }
 
     public Treino buscarTreino(String nomeTreino){
-        for (Treino t : treinos) {
-            if (t.getNome().equalsIgnoreCase(nomeTreino)) {
-                return t;
+         try {
+            if (nomeTreino == null || nomeTreino.isEmpty()) {
+                throw new AppException("O nome do treino não pode ser vazio.");
             }
+
+            for (Treino t : treinos) {
+                if (t.getNome().equalsIgnoreCase(nomeTreino)) {
+                    return t;
+                }
+            }
+
+            throw new AppException("Treino não encontrado.");
+
+        } catch (AppException e) {
+            System.out.println("Erro ao buscar treino: " + e.getMessage());
+            return null;
         }
-        return null;
     }
 
-    public void exibirTreino(String nomeTreino){
-        Treino t = buscarTreino(nomeTreino);
 
-        if (t != null){
+
+    public void exibirTreino(String nomeTreino){
+         try {
+            Treino t = buscarTreino(nomeTreino);
+
+            if (t == null) {
+                throw new AppException("Não foi possível exibir porque o treino não existe.");
+            }
+
             t.exibirResumoTreino();
-        } else {
-            System.out.println("Treino não encontrado.");
+
+        } catch (AppException e) {
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
