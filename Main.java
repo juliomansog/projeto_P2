@@ -54,5 +54,22 @@ public class Main {
 
         diario.salvarDados();
         diario.carregarDados();
+
+
+        try {
+            ExercicioAlongamento along = new ExercicioAlongamento("Alongamento de Pernas", 45);
+            along.exibirDetalhes();
+        } catch (AppException e) {
+            System.out.println("Erro no teste de Alongamento: " + e.getMessage());
+        }
+
+        try {
+    ExercicioCardio cardio = new ExercicioCardio("Corrida Leve", 20, 3.5);
+    cardio.exibirDetalhes();
+    System.out.println("Tempo total em segundos: " + cardio.getTempoTotalSegundos());
+    } catch (AppException e) {
+    System.out.println("Erro no teste de Cardio: " + e.getMessage());
+}
+
     }
 }

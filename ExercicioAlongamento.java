@@ -2,10 +2,19 @@ public class ExercicioAlongamento extends Exercicio {
 
     private int duracao;
 
-    public ExercicioAlongamento(String nome, int duracao) {
+   public ExercicioAlongamento(String nome, int duracao) throws AppException {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new AppException("O nome do alongamento não pode ser vazio.");
+        }
+        if (duracao <= 0) {
+            throw new AppException("A duração do alongamento deve ser maior que zero.");
+        }
         setNome(nome);
         setSeries(1);
         setRepeticoes(1);
+        setCarga(0);           
+        setTempoDescanso(0);   
+        setGrupoMuscular("Alongamento"); 
         this.duracao = duracao;
     }
 
