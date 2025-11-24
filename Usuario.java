@@ -11,12 +11,25 @@ public class Usuario {
     private ArrayList<Treino> treinos = new ArrayList<>();
 
     public Usuario(String nome, int idade, double peso, double altura, String objetivo, String anotacoes) {
+        try{
+            if (nome == null || nome.trim().isEmpty())
+                throw new AppException("Nome não pode ser vazio");
+            if (idade <= 0)
+                throw new AppException("Idade deve ser maior que zero");
+            if (peso <= 0) 
+                throw new AppException("Peso deve ser maior que zero");
+            if (altura <= 0) 
+                throw new AppException("Altura deve ser maior que zero");
+        
         this.nome = nome;
         this.idade = idade;
         this.peso = peso;
         this.altura = altura;
         this.objetivo = objetivo;
         this.anotacoes = anotacoes;
+        }catch (AppException e) {
+            System.out.println("Erro ao criar usúario" + e.getMessage());
+        }
     }
 
     // Getters
