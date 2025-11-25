@@ -3,7 +3,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class DiarioTreino implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     private List<Usuario> listaUsuarios;
@@ -21,11 +20,10 @@ public class DiarioTreino implements Serializable {
     }
 
     public void registrarTreino(Usuario usuario, Treino treino) {
-        if (usuario != null && treino != null) {
-            usuario.adicionarTreino(treino);
-            historicoTreinos.add(treino);
-            System.out.println("Treino registrado para o usuário: " + usuario.getNome());
-        }
+        if (usuario == null || treino == null) throw new AppException("Usuário ou treino nulo");
+        usuario.adicionarTreino(treino);
+        historicoTreinos.add(treino);
+        System.out.println("Treino registrado para o usuário: " + usuario.getNome());
     }
 
     public List<Treino> buscarTreinoPorData(String data) {
@@ -55,8 +53,16 @@ public class DiarioTreino implements Serializable {
         int totalTempo = 0;
 
         for (Treino t : treinos) {
-            totalVolume += t.calcularCargaTotal();
-            totalTempo += t.calcularTempoTotalSegundos();
+            try {
+                totalVolume += t.calcularCargaTotal();
+            } catch (AppException ex) {
+                System.out.println("Erro ao calcular volume do treino " + t.getNome() + ": " + ex.getMessage());
+            }
+            try {
+                totalTempo += t.calcularTempoTotalSegundos();
+            } catch (AppException ex) {
+                System.out.println("Erro ao calcular tempo do treino " + t.getNome() + ": " + ex.getMessage());
+            }
         }
 
         System.out.println("Treinos realizados: " + treinos.size());
@@ -116,7 +122,6 @@ public class DiarioTreino implements Serializable {
         }
     }
 
-    // Getters e setters
     public List<Usuario> getListaUsuarios() { return listaUsuarios; }
     public void setListaUsuarios(List<Usuario> listaUsuarios) {
         this.listaUsuarios = listaUsuarios != null ? listaUsuarios : new ArrayList<>();
