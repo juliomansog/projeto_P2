@@ -64,12 +64,12 @@ public class Main {
         }
 
         try {
-    ExercicioCardio cardio = new ExercicioCardio("Corrida Leve", 20, 3.5);
-    cardio.exibirDetalhes();
-    System.out.println("Tempo total em segundos: " + cardio.getTempoTotalSegundos());
-    } catch (AppException e) {
-    System.out.println("Erro no teste de Cardio: " + e.getMessage());
-}
+            ExercicioCardio cardio = new ExercicioCardio("Corrida Leve", 20, 3.5);
+            cardio.exibirDetalhes();
+            System.out.println("Tempo total em segundos: " + cardio.getTempoTotalSegundos());
+        } catch (AppException e) {
+            System.out.println("Erro no teste de Cardio: " + e.getMessage());
+        }
 
     }
 }
