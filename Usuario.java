@@ -49,7 +49,7 @@ public class Usuario {
 
     // Métodos
     public void adicionarTreino(Treino treino){
-       if (treino == null ||  nomeTreino.isEmpty())
+       if (treino == null)
            throw new AppException("Nome do treino Inválido");
        treinos.add(treino);
     }
