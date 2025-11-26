@@ -1,20 +1,9 @@
 public class ExercicioAlongamento extends Exercicio {
-
     private int duracao;
 
-   public ExercicioAlongamento(String nome, int duracao) throws AppException {
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new AppException("O nome do alongamento não pode ser vazio.");
-        }
-        if (duracao <= 0) {
-            throw new AppException("A duração do alongamento deve ser maior que zero.");
-        }
-        setNome(nome);
-        setSeries(1);
-        setRepeticoes(1);
-        setCarga(0);           
-        setTempoDescanso(0);   
-        setGrupoMuscular("Alongamento"); 
+    public ExercicioAlongamento(String nome, int duracao) {
+        super(nome, "Alongamento", 0, 1, 1, 0);
+        if (duracao <= 0) throw new AppException("A duração do alongamento deve ser maior que zero.");
         this.duracao = duracao;
     }
 
@@ -29,11 +18,6 @@ public class ExercicioAlongamento extends Exercicio {
         return (duracao / 60.0) * kcalPorMinuto;
     }
 
-    public void exibirTempo() {
-        System.out.println("Alongamento: " + getNome());
-        System.out.println("Duração sugerida: " + duracao + " segundos");
-    }
-
     @Override
     public double calcularVolumeTotal() {
         return calcularEsforco();
@@ -42,7 +26,7 @@ public class ExercicioAlongamento extends Exercicio {
     @Override
     public void exibirDetalhes() {
         System.out.println(toString());
-        exibirTempo();
+        System.out.println("Duração sugerida: " + duracao + " segundos");
         System.out.printf("Esforço estimado: %.2f kcal%n", calcularEsforco());
     }
 
@@ -50,5 +34,10 @@ public class ExercicioAlongamento extends Exercicio {
     public String toString() {
         return "Alongamento: " + getNome() +
                "\nDuração: " + duracao + " segundos";
+    }
+
+    @Override
+    public int getTempoSegundos() {
+        return duracao;
     }
 }
