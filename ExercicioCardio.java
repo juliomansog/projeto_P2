@@ -1,23 +1,11 @@
 public class ExercicioCardio extends Exercicio {
-
     private int tempo;
     private double metaDistancia;
 
-      public ExercicioCardio(String nome, int tempo, double metaDistancia) throws AppException {
-            if (nome == null || nome.trim().isEmpty()) {
-                throw new AppException("O nome do exercício cardio não pode ser vazio.");
-            }
-            if (tempo <= 0) {
-                throw new AppException("O tempo do exercício cardio deve ser maior que zero.");
-        }
-            if (metaDistancia < 0) {
-                throw new AppException("A meta de distância não pode ser negativa.");
-        }
-        setNome(nome);
-        setGrupoMuscular("Cardio");
-        setSeries(1);
-        setRepeticoes(1);
-        setCarga(0); 
+    public ExercicioCardio(String nome, int tempo, double metaDistancia) {
+        super(nome, "Cardio", 0, 1, 1, 0);
+        if (tempo <= 0) throw new AppException("O tempo do exercício cardio deve ser maior que zero.");
+        if (metaDistancia < 0) throw new AppException("A meta de distância não pode ser negativa.");
         this.tempo = tempo;
         this.metaDistancia = metaDistancia;
     }
@@ -28,8 +16,8 @@ public class ExercicioCardio extends Exercicio {
     }
 
     @Override
-    public int getTempoDescanso() {
-        return 0;
+    public int getTempoSegundos() {
+        return tempo * 60;
     }
 
     public double calcularEsforco() {
